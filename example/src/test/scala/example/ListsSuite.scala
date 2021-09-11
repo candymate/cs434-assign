@@ -1,9 +1,9 @@
 package example
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 
 /**
  * This class implements a ScalaTest test suite for the methods in object
@@ -12,7 +12,7 @@ import org.scalatest.junit.JUnitRunner
  * component of a program.
  *
  * A test suite is created by defining a class which extends the type
- * `org.scalatest.FunSuite`. When running ScalaTest, it will automatically
+ * `org.scalatest.AnyFunSuite`. When running ScalaTest, it will automatically
  * find this class and execute all of its tests.
  *
  * Adding the `@RunWith` annotation enables the test suite to be executed
@@ -24,7 +24,7 @@ import org.scalatest.junit.JUnitRunner
  * - Right-click this file in eclipse and chose "Run As" - "JUnit Test"
  */
 @RunWith(classOf[JUnitRunner])
-class ListsSuite extends FunSuite {
+class ListsSuite extends AnyFunSuite {
 
   /**
    * Tests are written using the `test` operator which takes two arguments:
@@ -47,7 +47,7 @@ class ListsSuite extends FunSuite {
    * This allows tests to be written in a more readable manner:
    */
   test("one plus one is three?") {
-    assert(1 + 1 == 3) // This assertion fails! Go ahead and fix it.
+    assert(1 + 2 == 3) // This assertion fails! Go ahead and fix it.
   }
 
 
@@ -72,7 +72,7 @@ class ListsSuite extends FunSuite {
    * We recommend to always use the `===` equality operator when writing tests.
    */
   test("details why one plus one is not three") {
-    assert(1 + 1 === 3) // Fix me, please!
+    assert(1 + 2 === 3) // Fix me, please!
   }
 
 
