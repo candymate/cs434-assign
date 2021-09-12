@@ -51,6 +51,6 @@ object Main {
     if (coins.isEmpty) 0
     else if (money < 0) 0
     else if (money == 0) 1
-    else countChange_r(money, coins.distinct.sortWith(_ > _)) 
+    else countChange_r(money, coins.sortWith(_ > _)) 
   }
 }
