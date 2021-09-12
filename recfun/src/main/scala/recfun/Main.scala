@@ -15,7 +15,7 @@ object Main {
    * Exercise 1
    */
   def pascal(c: Int, r: Int): Int = {
-    if (c < 0 || r < 0) throw new IllegalArgumentException
+    if (c < 0 || r < 0 || c > r) throw new IllegalArgumentException
     else if (c == 0 || r == 0 || c == r) 1
     else pascal(c-1, r-1) + pascal(c, r-1)
   }
@@ -51,6 +51,6 @@ object Main {
     if (coins.isEmpty) 0
     else if (money < 0) 0
     else if (money == 0) 1
-    else countChange_r(money, coins.sortWith(_ > _)) 
+    else countChange_r(money, coins.distinct.sortWith(_ > _)) 
   }
 }

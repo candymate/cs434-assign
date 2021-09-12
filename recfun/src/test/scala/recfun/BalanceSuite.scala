@@ -24,4 +24,25 @@ class BalanceSuite extends FunSuite {
   test("balance: counting is not enough") {
     assert(!balance("())(".toList))
   }
+
+
+  test("balance: empty string") {
+    assert(balance("".toList))
+  }
+
+  test("balance: no parantheses") {
+    assert(balance("no parantheses lol".toList))
+  }
+
+  test("balance: same count but not balanced") {
+    assert(!balance(")()((()))(".toList))
+    assert(!balance("()((())))(()".toList))
+  }
+
+  test("balance: more unbalanced") {
+    assert(!balance("(((((((".toList))
+    assert(!balance("))))".toList))
+    assert(!balance("(()))".toList))
+    assert(!balance("(".toList))
+  }
 }
