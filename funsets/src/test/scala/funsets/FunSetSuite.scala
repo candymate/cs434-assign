@@ -109,4 +109,36 @@ class FunSetSuite extends FunSuite {
       assert(!contains(s, 3), "Union 3")
     }
   }
+
+
+  test("forall basic tests") {
+    new TestSets {
+      val s = union(s1, union(s2, s3))
+      assert(forall(s, _ < 4), "Range 1")
+      assert(forall(s, _ > 0), "Range 2")
+      assert(!forall(s, _ % 2 == 0), "Even")
+    }
+  }
+
+  test("exists basic tests") {
+    new TestSets {
+      val s = union(s1, union(s2, s3))
+      assert(exists(s, _ == 2), "Exists test")
+      assert(!exists(s, _ == 4), "Not exists test")
+      assert(exists(s, _ % 2 == 1), "Odd exists test")
+      assert(exists(s, _ < 4), "All sat (Range)")
+    }
+  }
+
+  test("map basic tests") {
+    new TestSets {
+      val s = union(s1, union(s2, s3))
+      val m = map(s, _ * 2)
+      assert(contains(m, 2), "Map 1")
+      assert(contains(m, 4), "Map 2")
+      assert(contains(m, 6), "Map 3")
+      assert(!contains(m, 1), "Map 4")
+      assert(!contains(m, 3), "Map 5")
+    }
+  }
 }
