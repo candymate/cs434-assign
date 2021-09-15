@@ -111,6 +111,15 @@ class FunSetSuite extends FunSuite {
   }
 
 
+  test("filter basic tests") {
+    new TestSets {
+      val s = union(s1, union(s2, s3))
+      val res = filter(s, _ != 2)
+      assert(contains(res, 1), "Filter 1")
+      assert(!contains(res, 2), "Filter 2")
+      assert(contains(res, 3), "Filter 3")
+    }
+  }
   test("forall basic tests") {
     new TestSets {
       val s = union(s1, union(s2, s3))
