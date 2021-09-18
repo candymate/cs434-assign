@@ -12,3 +12,6 @@ libraryDependencies += "junit" % "junit" % "4.13" % "test"
 
 // to use junit with scalatest
 libraryDependencies += "org.scalatestplus" %% "junit-4-13" % "3.2.9.0" % "test"
+
+// parsing JSON
+libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
