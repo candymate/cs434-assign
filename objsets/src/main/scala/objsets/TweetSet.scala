@@ -168,10 +168,11 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       }
     }
     
-    if (leftRetweetMax.retweets > elem.retweets && 
-      leftRetweetMax.retweets > rightRetweetMax.retweets) leftRetweetMax
-    else if (elem.retweets > leftRetweetMax.retweets && 
-      elem.retweets > rightRetweetMax.retweets) elem
+    // if retweets are same, smaller text becomes the result
+    if (leftRetweetMax.retweets >= elem.retweets && 
+      leftRetweetMax.retweets >= rightRetweetMax.retweets) leftRetweetMax
+    else if (elem.retweets >= leftRetweetMax.retweets && 
+      elem.retweets >= rightRetweetMax.retweets) elem
     else rightRetweetMax
   }
 

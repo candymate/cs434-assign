@@ -69,4 +69,26 @@ class TweetSetSuite extends FunSuite {
       assert(trends.head.user == "a" || trends.head.user == "b")
     }
   }
+
+
+  test("mostRetweeted: all sets") {
+    new TestSets {
+      val maxTweet = set5.mostRetweeted
+      assert(maxTweet.retweets === 20)
+      assert(maxTweet.user === "a") // text smaller should be the result
+    }
+  }
+
+  test("GoogleVsApple: size check") {
+    new TestSets {
+      def listSize(list: TweetList): Int = {
+        var res = 0
+        list.foreach(_ => res += 1)
+        res
+      }
+      assert(size(GoogleVsApple.googleTweets) === 38)
+      assert(size(GoogleVsApple.appleTweets) === 150)
+      assert(listSize(GoogleVsApple.trending) === 179)
+    }
+  }
 }
