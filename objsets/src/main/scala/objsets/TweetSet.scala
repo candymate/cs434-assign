@@ -147,9 +147,9 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
   def union(that: TweetSet): TweetSet = filterAcc(_ => true, that)
 
   def mostRetweeted: Tweet = {
-    val leftRetweetMax = {
+    def mostRetweetedWrap(set: TweetSet): Tweet = {
       try {
-        val result = left.mostRetweeted
+        val result = set.mostRetweeted
         require(result.retweets >= 0)
         result
       }
@@ -157,16 +157,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
         case e: java.util.NoSuchElementException => new Tweet("dummy", "dummy", -1)
       }
     }
-    val rightRetweetMax = {
-      try {
-        val result = right.mostRetweeted
-        require(result.retweets >= 0)
-        result
-      }
-      catch {
-        case e: java.util.NoSuchElementException => new Tweet("dummy", "dummy", -1)
-      }
-    }
+    val leftRetweetMax = mostRetweetedWrap(left)
+    val rightRetweetMax = mostRetweetedWrap(right)
     
     // if retweets are same, smaller text becomes the result
     if (leftRetweetMax.retweets >= elem.retweets && 
