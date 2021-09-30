@@ -28,21 +28,15 @@ object Huffman {
 
   def weight(tree: CodeTree): Int = {
     tree match {
-      case Fork(lt, rt, _, w) => {
-        require(w == weight(lt) + weight(rt))
-        w
-      }
-      case Leaf(_, weight) => weight
+      case Fork(lt, rt, _, w) => w
+      case Leaf(_, w) => w
     }
   }
 
   def chars(tree: CodeTree): List[Char] = {
     tree match {
-      case Fork(lt, rt, chl, _) => {
-        require(chl == chars(lt) ::: chars(rt))
-        chl
-      }
-      case Leaf(ch, _) => List(ch)
+      case Fork(lt, rt, chl, _) => chl
+      case Leaf(chr, _) => List(chr)
     }
   }
 
