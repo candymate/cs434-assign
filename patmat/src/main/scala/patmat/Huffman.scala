@@ -1,6 +1,7 @@
 package patmat
 
 import common._
+import scala.annotation.tailrec
 
 /**
  * Assignment 4: Huffman coding
@@ -83,6 +84,7 @@ object Huffman {
    */
   def times(chars: List[Char]): List[(Char, Int)] = {
     val charsDistinct = chars.distinct
+    @tailrec
     def genCountMap(acc: List[(Char, Int)], targetChars: List[Char]): List[(Char, Int)] = {
       targetChars match {
         case e :: t => genCountMap((e, chars.count(_ == e)) :: acc, t)
