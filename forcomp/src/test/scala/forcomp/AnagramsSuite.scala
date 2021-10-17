@@ -105,4 +105,11 @@ class AnagramsSuite extends FunSuite {
     assert(sentenceAnagrams(sentence).toSet === anas.toSet)
   }  
 
+  
+  test("subtract: penpineappleapplepen - ppapppap") {
+    val ppap1 = List(('a', 2), ('e', 5), ('i', 1), ('l', 2), ('n', 3), ('p', 7))
+    val ppap2 = List(('a', 2), ('p', 6))
+    val diff = List(('e', 5), ('i', 1), ('l', 2), ('n', 3), ('p', 1))
+    assert(subtract(ppap1, ppap2) === diff)
+  }
 }
