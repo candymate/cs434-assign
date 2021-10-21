@@ -62,11 +62,7 @@ object Anagrams {
 
   /** Returns all the anagrams of a given word. */
   def wordAnagrams(word: Word): List[Word] = {
-    val resultList = dictionaryByOccurrences.get(wordOccurrences(word))
-    resultList match {
-      case Some(e) => e
-      case None => List()
-    }
+    val resultList = dictionaryByOccurrences.getOrElse(wordOccurrences(word), List())
   }
 
   /** Returns the list of all subsets of the occurrence list.
@@ -181,10 +177,7 @@ object Anagrams {
       else {
         for {
           comb <- combinations(occ)
-          anagrams <- dictionaryByOccurrences.get(comb) match {
-            case Some(e) => e
-            case None => List()
-          }
+          anagrams <- dictionaryByOccurrences.getOrElse(comb, List())
           res <- sentenceAnagramsOcc(subtract(occ, comb))
         }
         yield {
