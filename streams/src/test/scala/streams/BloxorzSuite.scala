@@ -64,4 +64,62 @@ class BloxorzSuite extends FunSuite {
       assert(solution.length == optsolution.length)
     }
   }
+
+  trait Level2 extends SolutionChecker {
+      /* terrain for level 2*/
+
+    val level =
+    """-------
+      |-ooo---
+      |-Soo---
+      |-o-----
+      |-oooT--
+      |-------""".stripMargin
+
+    val optsolution = List(Right, Up, Left, Down, Down, Right, Right)
+  }
+
+  test("terrain function level 2") {
+    new Level2 {
+      assert(terrain(Pos(1,1)), "1,1")
+      assert(!terrain(Pos(3,2)), "3,2")
+    }
+  }
+
+  test("findChar level 2") {
+    new Level2 {
+      assert(startPos == Pos(2,1))
+    }
+  }
+
+  test("optimal solution for level 2") {
+    new Level2 {
+      assert(solve(solution) == Block(goal, goal))
+    }
+  }
+
+  test("optimal solution length for level 2") {
+    new Level2 {
+      assert(solution.length == optsolution.length)
+    }
+  }
+
+  trait Level3 extends SolutionChecker {
+      /* terrain for level 3*/
+      /* unsolvable */
+
+    val level =
+    """ooo-------
+      |oSooo-----
+      |oooo-oooo-
+      |-oo-oooooo
+      |-----ooToo
+      |------ooo-""".stripMargin
+  }
+
+  test("solution doesn't exist for level 3") {
+    new Level3 {
+      assert(solution === List())
+    }
+  }
 }
