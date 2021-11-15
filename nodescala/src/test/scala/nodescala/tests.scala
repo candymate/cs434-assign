@@ -30,6 +30,58 @@ class NodeScalaSuite extends FunSuite {
       case t: TimeoutException => // ok!
     }
   }
+  test("Future.delay") {
+    try {
+      Await.result(Future.delay(Duration(2000, "millis")), 1 second)
+      assert(false)
+    } catch {
+      case t: TimeoutException => // ok!
+    }
+  }
+
+  test("Future.all") {
+    val never = Future.never[Int]
+    val always = Future.always(517)
+    val always2 = Future.always(520)
+    val delayedAlways = Future {
+      Thread.sleep(1000)
+      540
+    }
+
+    try {
+      Await.result(Future.all(List(never, always)), 1 second)
+      assert(false)
+    } catch {
+      case t: TimeoutException => // ok!
+    }
+
+    assert(Await.result(Future.all(List(always, always2)), 1 second) == List(517, 520))
+
+    // check if futures run in parallel
+    try {
+      val res = Await.result(Future.all(List(delayedAlways, delayedAlways, delayedAlways)), 2 second)
+      assert(res == List(540, 540, 540))
+    } catch {
+      case t: TimeoutException => // ok!
+    }
+  }
+
+  test("Future.any") {
+    val never = Future.never[Int]
+    val always = Future.always(517)
+    val delayedAlways = Future {
+      Thread.sleep(2000)
+      540
+    }
+
+    assert(Await.result(Future.any(List(delayedAlways, always)), 3 second) == 517)
+    try {
+      Await.result(Future.all(List(never, delayedAlways)), 1 second)
+      assert(false)
+    } catch {
+      case t: TimeoutException => // ok!
+    }
+  }
 
   
   
